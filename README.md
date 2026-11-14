@@ -70,16 +70,17 @@ pip install psycopg2-binary pandas matplotlib sqlalchemy
 ##  Installazione e Configurazione
 
 ### 1. Preparazione Repository
-Creare la cartella del progetto e organizzare i file secondo la struttura sopra indicata:
+Creare la cartella del progetto e organizzare i file secondo la struttura:
 ```bash
 mkdir PersonalExpenseSystem
 cd PersonalExpenseSystem
 ```
+oppure salvare localmente una cartella tramite interfaccia.
 
 ### 2. Configurazione del Database PostgreSQL
 1. Apri **pgAdmin 4** (o la riga di comando `psql`).
 2. Crea un nuovo database denominato **`gestione_spese`**:
-   - In pgAdmin: tasto destro su *Databases* -> *Create* -> *Database...* -> Inserisci `gestione_spese` -> *Save*.
+   - In pgAdmin: tasto destro su *Databases* -> *Create* -> *Database...* -> Inserisci `NOME_DEL_TUO_DATABASE` -> *Save*.
 3. Apri lo strumento query (*Query Tool*) sul database `gestione_spese`.
 4. Esegui lo script SQL contenuto in `sql/database.sql` per creare le tabelle e popolare i dati iniziali di prova.
 
@@ -89,10 +90,10 @@ Apri il file `src/main.py` e aggiorna il dizionario di configurazione con le cre
 ```python
 DB_CONFIG = {
     'dbname': 'gestione_spese',
-    'user': 'postgres',
+    'user': 'IL_TUO_USERNAME',
     'password': 'LA_TUA_PASSWORD',
     'host': 'localhost',
-    'port': '5432'
+    'port': '5432' #oppure altra porta
 }
 ```
 
@@ -191,12 +192,16 @@ Fornisce un sottomenu dedicato all'analisi dei dati:
 
 - **Eccezioni**: Il codice Python gestisce le eccezioni di PostgreSQL tramite il modulo `psycopg2.errors` (`UniqueViolation`, `ForeignKeyViolation`, `CheckViolation`).
 - **Transazioni**: In caso di errore durante qualsiasi operazione SQL, viene eseguito il rollback (`conn.rollback()`) per preservare l'integrita del database.
-- **File di Log (`app.log`)**: Tutte le operazioni di sistema, i messaggi di successo e gli eventuali errori vengono registrati sia a schermo sia nel file `app.log` completo di timestamp.
+- **File di Log (`app.log`)**: Tutte le operazioni di sistema, i messaggi di successo e gli eventuali errori vengono registrati sia a schermo sia nel file `app.log` completo di timestamp, il file viene salvato nella cartella/directory dove il main.py viene salvato.
 
 ---
 
 ##  Demo:
+nota: estrarre il file .rar, eccedeva il limite massimo per caricarlo su github
+Contenuto:
 1. Avvio del programma `main.py`.
 2. Navigazione nei menu interattivi.
 3. Inserimento di categorie, spese e budget di test.
 4. Generazione dei report di spesa e visualizzazione del grafico.
+5. validazioni e verifiche sul database
+6. chiusura del programma
